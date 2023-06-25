@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Registration or Sign Up form in HTML CSS | CodingLab </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="Errorp">Register to get your api key</div>
+  <div id="mainP" class="wrapper">
+    <h2> Welcome page of local </h2>
+<br>
+<br>
+<br>
+
+<h2> your api key is please save it : </h2>
+<br>
+    <p id="value-output"></p>
+
+    <br>
+<br>
+<br>
+<a href="https://local-api-2b49.onrender.com/docs/">visit this link to explore the api</a>
+
+  </div>
+</body>
+
+
+<script>
+    window.onload = function() {
+        
+        var errorp = document.getElementById('Errorp');
+        errorp.style.display = 'none';
+        var mainp = document.getElementById('mainP');
+      // Get the value from localStorage
+      var value = localStorage.getItem('myValue');
+      if(value == null || value == undefined){
+        mainp.style.display = 'none';
+        errorp.style.display = 'block';
+      }
+      // Display the value on the page
+      var output = document.getElementById('value-output');
+      output.innerText = value;
+      localStorage.clear();
+    };
+  </script>
+
+  
+
+
+</html>

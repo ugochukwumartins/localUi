@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Registration Of local </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <h2>Local Api Registration</h2>
+    <form id="loginForm" onsubmit="handleSubmit(event)">
+      <div class="input-box">
+        <input name="user_name" type="text" placeholder="Enter your name" required>
+      </div>
+      <div class="input-box">
+        <input name="email" type="text" placeholder="Enter your email" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Create password" required>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Register Now">
+      </div>
+      <!-- <div class="text">
+        <h3>Already have an account? <a href="#">Login now</a></h3>
+        
+      </div> -->
+    </form>
+  </div>
+</body>
+<script>
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    var myObject = {};
+    const form = document.getElementById('loginForm');
+    const formData = new FormData(form);
+console.log(formData)
+    for (let [name, value] of formData) {
+      console.log(`${name}: ${value}`);
+      if(name=="user_name"){
+        myObject.user_name= value
+      }
+      if(name=="email"){
+        myObject.email= value;
+      }
+      if(name=="password"){
+        myObject.password = value;
+      }
+    }
+    console.log(myObject)
+    console.log(JSON.stringify(myObject))
+  
+      //
+      fetch('https://local-api-2b49.onrender.com/signUp', {
+  method: 'POST',
+ 
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(myObject)
+})
+  .then(function(response) {
+    // Handle the response
+    console.log( response.body)
+    if (response.ok) {
+      console.log('Post created successfully!');
+      return response.json();
+    //  console.log(response);
+    } else {
+      console.log('Error creating post:', response.statusText);
+    }
+  }).then(function(data) {
+    // Handle the response body (parsed JSON or plain text)
+    console.log('Response:', data);
+    console.log('Response:', data.message);
+    localStorage.setItem('myValue', data.message);
+    window.location.href = 'succes.html';
+  }).catch(function(error) {
+    console.log('Error:', error);
+  })
+ 
+  };
+
+  
+</script>
+
+</html>
